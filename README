@@ -1,0 +1,466 @@
+:: How to setup a kernel debug lab ?
+
+	(host) install archlinux
+	(host) ./setup_kernel_lab.sh
+
+:: Start a tour to linux kernel
+
+	$ ./setup_kernel_lab.sh
+	[*] install essential tools
+	resolving dependencies...
+	looking for conflicting packages...
+
+	Packages (2) arch-install-scripts-21-1  qemu-3.1.0-2
+
+	Total Installed Size:  26.30 MiB
+	Net Upgrade Size:       0.00 MiB
+
+	:: Proceed with installation? [Y/n]
+	(2/2) checking keys in keyring                                                                 [########################################################] 100%
+	(2/2) checking package integrity                                                               [########################################################] 100%
+	(2/2) loading package files                                                                    [########################################################] 100%
+	(2/2) checking for file conflicts                                                              [########################################################] 100%
+	(2/2) checking available disk space                                                            [########################################################] 100%
+	:: Processing package changes...
+	(1/2) reinstalling arch-install-scripts                                                        [########################################################] 100%
+	(2/2) reinstalling qemu                                                                        [########################################################] 100%
+	:: Running post-transaction hooks...
+	(1/2) Reloading device manager configuration...
+	(2/2) Arming ConditionNeedsUpdate...
+	[*] create a img (bootfs)
+	[*] (kernel-dev-archlinux.img) is found. Delete it and recreate a new one (y/N): n
+	[*] compile linux kernel
+	#
+	# configuration written to .config
+	#
+	Using .config as base
+	Merging ./kernel/configs/kvm_guest.config
+	Value of CONFIG_HYPERVISOR_GUEST is redefined by fragment ./kernel/configs/kvm_guest.config:
+	Previous value: # CONFIG_HYPERVISOR_GUEST is not set
+	New value: CONFIG_HYPERVISOR_GUEST=y
+
+	Value of CONFIG_VIRTIO_PCI is redefined by fragment ./kernel/configs/kvm_guest.config:
+	Previous value: # CONFIG_VIRTIO_PCI is not set
+	New value: CONFIG_VIRTIO_PCI=y
+
+	Value of CONFIG_NET_9P is redefined by fragment ./kernel/configs/kvm_guest.config:
+	Previous value: # CONFIG_NET_9P is not set
+	New value: CONFIG_NET_9P=y
+
+	Value of CONFIG_SCSI_LOWLEVEL is redefined by fragment ./kernel/configs/kvm_guest.config:
+	Previous value: # CONFIG_SCSI_LOWLEVEL is not set
+	New value: CONFIG_SCSI_LOWLEVEL=y
+
+	#
+	# merged configuration written to .config (needs make)
+	#
+	scripts/kconfig/conf  --oldconfig Kconfig
+	*
+	* Restart config...
+	*
+	*
+	* Processor type and features
+	*
+	Symmetric multi-processing support (SMP) [Y/n/?] y
+	Support x2apic (X86_X2APIC) [N/y/?] (NEW)
+	Enable MPS table (X86_MPPARSE) [Y/n/?] y
+	Avoid speculative indirect branches in kernel (RETPOLINE) [Y/n/?] y
+	x86 CPU resource control support (X86_CPU_RESCTRL) [N/y/?] n
+	Support for extended (non-PC) x86 platforms (X86_EXTENDED_PLATFORM) [Y/n/?] y
+	ScaleMP vSMP (X86_VSMP) [N/y/?] n
+	Goldfish (Virtual Platform) (X86_GOLDFISH) [N/y/?] n
+	Intel MID platform support (X86_INTEL_MID) [N/y/?] n
+	Intel Low Power Subsystem Support (X86_INTEL_LPSS) [N/y/?] n
+	AMD ACPI2Platform devices support (X86_AMD_PLATFORM_DEVICE) [N/y/?] n
+	Intel SoC IOSF Sideband support for SoC platforms (IOSF_MBI) [Y/?] y
+	  Enable IOSF sideband access through debugfs (IOSF_MBI_DEBUG) [N/y/?] n
+	Single-depth WCHAN output (SCHED_OMIT_FRAME_POINTER) [Y/n/?] y
+	*
+	* Linux guest support
+	*
+	Linux guest support (HYPERVISOR_GUEST) [Y/n/?] y
+	  Enable paravirtualization code (PARAVIRT) [Y/n/?] y
+	  paravirt-ops debugging (PARAVIRT_DEBUG) [N/y/?] (NEW)
+	  Paravirtualization layer for spinlocks (PARAVIRT_SPINLOCKS) [N/y/?] (NEW)
+	  Xen guest support (XEN) [N/y/?] (NEW)
+	  KVM Guest support (including kvmclock) (KVM_GUEST) [Y/n/?] y
+	  Support for running PVH guests (PVH) [N/y/?] (NEW)
+	  Enable debug information for KVM Guests in debugfs (KVM_DEBUG_FS) [N/y/?] (NEW)
+	  Paravirtual steal time accounting (PARAVIRT_TIME_ACCOUNTING) [N/y/?] (NEW)
+	  Jailhouse non-root cell support (JAILHOUSE_GUEST) [N/y/?] (NEW)
+	Processor family
+	  1. Opteron/Athlon64/Hammer/K8 (MK8)
+	  2. Intel P4 / older Netburst based Xeon (MPSC)
+	  3. Core 2/newer Xeon (MCORE2)
+	  4. Intel Atom (MATOM)
+	> 5. Generic-x86-64 (GENERIC_CPU)
+	choice[1-5?]: 5
+	Old AMD GART IOMMU support (GART_IOMMU) [N/y/?] n
+	IBM Calgary IOMMU support (CALGARY_IOMMU) [Y/n/?] y
+	  Should Calgary be enabled by default? (CALGARY_IOMMU_ENABLED_BY_DEFAULT) [Y/n/?] y
+	Enable Maximum number of SMP Processors and NUMA Nodes (MAXSMP) [N/y/?] n
+	Maximum number of CPUs (NR_CPUS) [64] 64
+	Multi-core scheduler support (SCHED_MC) [Y/n/?] y
+	  CPU core priorities scheduler support (SCHED_MC_PRIO) [Y/n/?] y
+	Reroute for broken boot IRQs (X86_REROUTE_FOR_BROKEN_BOOT_IRQS) [Y/n/?] y
+	Machine Check / overheating reporting (X86_MCE) [Y/n/?] y
+	  Support for deprecated /dev/mcelog character device (X86_MCELOG_LEGACY) [N/y/?] n
+	  Intel MCE features (X86_MCE_INTEL) [Y/n/?] y
+	  AMD MCE features (X86_MCE_AMD) [Y/n/?] y
+	Machine check injector support (X86_MCE_INJECT) [N/m/y/?] n
+	Dell i8k legacy laptop support (I8K) [N/m/y/?] n
+	CPU microcode loading support (MICROCODE) [Y/n/?] y
+	  Intel microcode loading support (MICROCODE_INTEL) [Y/n/?] y
+	  AMD microcode loading support (MICROCODE_AMD) [Y/n/?] y
+	/dev/cpu/*/msr - Model-specific register support (X86_MSR) [Y/n/m/?] y
+	/dev/cpu/*/cpuid - CPU information support (X86_CPUID) [Y/n/m/?] y
+	Enable 5-level page tables support (X86_5LEVEL) [N/y/?] n
+	Enable statistic for Change Page Attribute (X86_CPA_STATISTICS) [N/y/?] n
+	AMD Secure Memory Encryption (SME) support (AMD_MEM_ENCRYPT) [N/y/?] n
+	Numa Memory Allocation and Scheduler Support (NUMA) [Y/n/?] y
+	  Old style AMD Opteron NUMA detection (AMD_NUMA) [Y/n/?] y
+	  ACPI NUMA detection (X86_64_ACPI_NUMA) [Y/n/?] y
+	  NUMA emulation (NUMA_EMU) [N/y/?] n
+	Maximum NUMA Nodes (as a power of 2) (NODES_SHIFT) [6] 6
+	Support non-standard NVDIMMs and ADR protected memory (X86_PMEM_LEGACY) [N/m/y/?] n
+	Check for low memory corruption (X86_CHECK_BIOS_CORRUPTION) [Y/n/?] y
+	  Set the default setting of memory_corruption_check (X86_BOOTPARAM_MEMORY_CORRUPTION_CHECK) [Y/n/?] y
+	Amount of low memory, in kilobytes, to reserve for the BIOS (X86_RESERVE_LOW) [64] 64
+	MTRR (Memory Type Range Register) support (MTRR) [Y/?] y
+	  MTRR cleanup support (MTRR_SANITIZER) [N/y/?] n
+	Intel MPX (Memory Protection Extensions) (X86_INTEL_MPX) [N/y/?] n
+	Intel Memory Protection Keys (X86_INTEL_MEMORY_PROTECTION_KEYS) [Y/n/?] y
+	EFI runtime service support (EFI) [Y/n/?] y
+	  EFI stub support (EFI_STUB) [Y/n/?] y
+	    EFI mixed-mode support (EFI_MIXED) [Y/n/?] y
+	Enable seccomp to safely compute untrusted bytecode (SECCOMP) [Y/n/?] y
+	Timer frequency
+	  1. 100 HZ (HZ_100)
+	  2. 250 HZ (HZ_250)
+	  3. 300 HZ (HZ_300)
+	> 4. 1000 HZ (HZ_1000)
+	choice[1-4?]: 4
+	kexec system call (KEXEC) [Y/n/?] y
+	kexec file based system call (KEXEC_FILE) [N/y/?] n
+	kernel crash dumps (CRASH_DUMP) [Y/n/?] y
+	kexec jump (KEXEC_JUMP) [N/y/?] n
+	Physical address where the kernel is loaded (PHYSICAL_START) [0x1000000] 0x1000000
+	Build a relocatable kernel (RELOCATABLE) [Y/?] y
+	  Randomize the address of the kernel image (KASLR) (RANDOMIZE_BASE) [Y/n/?] y
+	Alignment value to which kernel should be aligned (PHYSICAL_ALIGN) [0x200000] 0x200000
+	Randomize the kernel memory sections (RANDOMIZE_MEMORY) [Y/n/?] y
+	Support for hot-pluggable CPUs (HOTPLUG_CPU) [Y/?] y
+	  Set default setting of cpu0_hotpluggable (BOOTPARAM_HOTPLUG_CPU0) [N/y/?] n
+	  Debug CPU0 hotplug (DEBUG_HOTPLUG_CPU0) [N/y/?] n
+	Disable the 32-bit vDSO (needed for glibc 2.3.3) (COMPAT_VDSO) [N/y/?] n
+	vsyscall table for legacy applications
+	> 1. Emulate (LEGACY_VSYSCALL_EMULATE)
+	  2. None (LEGACY_VSYSCALL_NONE)
+	choice[1-2?]: 1
+	Built-in kernel command line (CMDLINE_BOOL) [N/y/?] n
+	*
+	* Plan 9 Resource Sharing Support (9P2000)
+	*
+	Plan 9 Resource Sharing Support (9P2000) (NET_9P) [Y/n/m/?] y
+	  9P Virtio Transport (NET_9P_VIRTIO) [Y/n/m/?] y
+	  Debug information (NET_9P_DEBUG) [N/y/?] (NEW)
+	*
+	* Block devices
+	*
+	Block devices (BLK_DEV) [Y/n/?] y
+	  Null test block driver (BLK_DEV_NULL_BLK) [N/m/y/?] n
+	  Normal floppy disk support (BLK_DEV_FD) [N/m/y/?] n
+	  Block Device Driver for Micron PCIe SSDs (BLK_DEV_PCIESSD_MTIP32XX) [N/m/y/?] n
+	  Micro Memory MM5415 Battery Backed RAM support (BLK_DEV_UMEM) [N/m/y/?] n
+	  Loopback device support (BLK_DEV_LOOP) [Y/n/m/?] y
+	    Number of loop devices to pre-create at init time (BLK_DEV_LOOP_MIN_COUNT) [8] 8
+	    Cryptoloop Support (BLK_DEV_CRYPTOLOOP) [N/m/y/?] n
+	  DRBD Distributed Replicated Block Device support (BLK_DEV_DRBD) [N/m/y/?] n
+	  Network block device support (BLK_DEV_NBD) [N/m/y/?] n
+	  STEC S1120 Block Driver (BLK_DEV_SKD) [N/m/y/?] n
+	  Promise SATA SX8 support (BLK_DEV_SX8) [N/m/y/?] n
+	  RAM block device support (BLK_DEV_RAM) [N/m/y/?] n
+	  Packet writing on CD/DVD media (DEPRECATED) (CDROM_PKTCDVD) [N/m/y/?] n
+	  ATA over Ethernet support (ATA_OVER_ETH) [N/m/y/?] n
+	  Virtio block driver (VIRTIO_BLK) [Y/n/m/?] y
+	    SCSI passthrough request for the Virtio block driver (VIRTIO_BLK_SCSI) [N/y/?] (NEW)
+	  Rados block device (RBD) (BLK_DEV_RBD) [N/m/y/?] n
+	  IBM Flash Adapter 900GB Full Height PCIe Device Driver (BLK_DEV_RSXX) [N/m/y/?] n
+	*
+	* SCSI low-level drivers
+	*
+	SCSI low-level drivers (SCSI_LOWLEVEL) [Y/n/?] y
+	  iSCSI Initiator over TCP/IP (ISCSI_TCP) [N/m/y/?] (NEW)
+	  iSCSI Boot Sysfs Interface (ISCSI_BOOT_SYSFS) [N/m/y/?] (NEW)
+	  Chelsio T3 iSCSI support (SCSI_CXGB3_ISCSI) [N/m/y/?] (NEW)
+	  Chelsio T4 iSCSI support (SCSI_CXGB4_ISCSI) [N/m/y/?] (NEW)
+	  QLogic NetXtreme II iSCSI support (SCSI_BNX2_ISCSI) [N/m/y/?] (NEW)
+	  Emulex 10Gbps iSCSI - BladeEngine 2 (BE2ISCSI) [N/m/y/?] (NEW)
+	  3ware 5/6/7/8xxx ATA-RAID support (BLK_DEV_3W_XXXX_RAID) [N/m/y/?] (NEW)
+	  HP Smart Array SCSI driver (SCSI_HPSA) [N/m/y/?] (NEW)
+	  3ware 9xxx SATA-RAID support (SCSI_3W_9XXX) [N/m/y/?] (NEW)
+	  3ware 97xx SAS/SATA-RAID support (SCSI_3W_SAS) [N/m/y/?] (NEW)
+	  ACARD SCSI support (SCSI_ACARD) [N/m/y/?] (NEW)
+	  Adaptec AACRAID support (SCSI_AACRAID) [N/m/y/?] (NEW)
+	  Adaptec AIC7xxx Fast -> U160 support (New Driver) (SCSI_AIC7XXX) [N/m/y/?] (NEW)
+	  Adaptec AIC79xx U320 support (SCSI_AIC79XX) [N/m/y/?] (NEW)
+	  Adaptec AIC94xx SAS/SATA support (SCSI_AIC94XX) [N/m/y/?] (NEW)
+	  Marvell 88SE64XX/88SE94XX SAS/SATA support (SCSI_MVSAS) [N/m/y/?] (NEW)
+	  Marvell UMI driver (SCSI_MVUMI) [N/m/y/?] (NEW)
+	  Adaptec I2O RAID support  (SCSI_DPT_I2O) [N/m/y/?] (NEW)
+	  AdvanSys SCSI support (SCSI_ADVANSYS) [N/m/y/?] (NEW)
+	  ARECA (ARC11xx/12xx/13xx/16xx) SATA/SAS RAID Host Adapter (SCSI_ARCMSR) [N/m/y/?] (NEW)
+	  ATTO Technology's ExpressSAS RAID adapter driver (SCSI_ESAS2R) [N/m/y/?] (NEW)
+	  LSI Logic New Generation RAID Device Drivers (MEGARAID_NEWGEN) [N/y/?] (NEW)
+	  LSI Logic Legacy MegaRAID Driver (MEGARAID_LEGACY) [N/m/y/?] (NEW)
+	  LSI Logic MegaRAID SAS RAID Module (MEGARAID_SAS) [N/m/y/?] (NEW)
+	  LSI MPT Fusion SAS 3.0 & SAS 2.0 Device Driver (SCSI_MPT3SAS) [N/m/y/?] (NEW)
+	  Legacy MPT2SAS config option (SCSI_MPT2SAS) [N/m/y/?] (NEW)
+	  Microsemi PQI Driver (SCSI_SMARTPQI) [N/m/y/?] (NEW)
+	  Universal Flash Storage Controller Driver Core (SCSI_UFSHCD) [N/m/y/?] (NEW)
+	  HighPoint RocketRAID 3xxx/4xxx Controller support (SCSI_HPTIOP) [N/m/y/?] (NEW)
+	  BusLogic SCSI support (SCSI_BUSLOGIC) [N/m/y/?] (NEW)
+	  Mylex DAC960/DAC1100 PCI RAID Controller (Block Interface) (SCSI_MYRB) [N/m/y/?] (NEW)
+	  Mylex DAC960/DAC1100 PCI RAID Controller (SCSI Interface) (SCSI_MYRS) [N/m/y/?] (NEW)
+	  VMware PVSCSI driver support (VMWARE_PVSCSI) [N/m/y/?] (NEW)
+	  Cisco SNIC Driver (SCSI_SNIC) [N/m/y/?] (NEW)
+	  DMX3191D SCSI support (SCSI_DMX3191D) [N/m/y/?] (NEW)
+	  Intel/ICP (former GDT SCSI Disk Array) RAID Controller support (SCSI_GDTH) [N/m/y/?] (NEW)
+	  Intel(R) C600 Series Chipset SAS Controller (SCSI_ISCI) [N/m/y/?] (NEW)
+	  IBM ServeRAID support (SCSI_IPS) [N/m/y/?] (NEW)
+	  Initio 9100U(W) support (SCSI_INITIO) [N/m/y/?] (NEW)
+	  Initio INI-A100U2W support (SCSI_INIA100) [N/m/y/?] (NEW)
+	  Promise SuperTrak EX Series support (SCSI_STEX) [N/m/y/?] (NEW)
+	  SYM53C8XX Version 2 SCSI support (SCSI_SYM53C8XX_2) [N/m/y/?] (NEW)
+	  IBM Power Linux RAID adapter support (SCSI_IPR) [N/m/y/?] (NEW)
+	  Qlogic QLA 1240/1x80/1x160 SCSI support (SCSI_QLOGIC_1280) [N/m/y/?] (NEW)
+	  QLogic ISP4XXX and ISP82XX host adapter family support (SCSI_QLA_ISCSI) [N/m/y/?] (NEW)
+	  Tekram DC395(U/UW/F) and DC315(U) SCSI support (SCSI_DC395x) [N/m/y/?] (NEW)
+	  Tekram DC390(T) and Am53/79C974 SCSI support (new driver) (SCSI_AM53C974) [N/m/y/?] (NEW)
+	  Western Digital WD7193/7197/7296 support (SCSI_WD719X) [N/m/y/?] (NEW)
+	  SCSI debugging host and device simulator (SCSI_DEBUG) [N/m/y/?] (NEW)
+	  PMC SIERRA Linux MaxRAID adapter support (SCSI_PMCRAID) [N/m/y/?] (NEW)
+	  PMC-Sierra SPC 8001 SAS/SATA Based Host Adapter driver (SCSI_PM8001) [N/m/y/?] (NEW)
+	  virtio-scsi support (SCSI_VIRTIO) [Y/n/m/?] y
+	*
+	* Mice
+	*
+	Mice (INPUT_MOUSE) [Y/n/?] y
+	  PS/2 mouse (MOUSE_PS2) [Y/n/m/?] y
+	    Elantech PS/2 protocol extension (MOUSE_PS2_ELANTECH) [N/y/?] n
+	    Sentelic Finger Sensing Pad PS/2 protocol extension (MOUSE_PS2_SENTELIC) [N/y/?] n
+	    eGalax TouchKit PS/2 protocol extension (MOUSE_PS2_TOUCHKIT) [N/y/?] n
+	    Virtual mouse (vmmouse) (MOUSE_PS2_VMMOUSE) [N/y/?] (NEW)
+	  Serial mouse (MOUSE_SERIAL) [N/m/y/?] n
+	  Apple USB Touchpad support (MOUSE_APPLETOUCH) [N/m/y/?] n
+	  Apple USB BCM5974 Multitouch trackpad support (MOUSE_BCM5974) [N/m/y/?] n
+	  Cypress APA I2C Trackpad support (MOUSE_CYAPA) [N/m/y/?] n
+	  ELAN I2C Touchpad support (MOUSE_ELAN_I2C) [N/m/y/?] n
+	  DEC VSXXX-AA/GA mouse and VSXXX-AB tablet (MOUSE_VSXXXAA) [N/m/y/?] n
+	  Synaptics I2C Touchpad support (MOUSE_SYNAPTICS_I2C) [N/m/y/?] n
+	  Synaptics USB device support (MOUSE_SYNAPTICS_USB) [N/m/y/?] n
+	*
+	* Hardware Random Number Generator Core support
+	*
+	Hardware Random Number Generator Core support (HW_RANDOM) [Y/n/m/?] y
+	  Timer IOMEM HW Random Number Generator support (HW_RANDOM_TIMERIOMEM) [N/m/y/?] n
+	  Intel HW Random Number Generator support (HW_RANDOM_INTEL) [N/m/y/?] n
+	  AMD HW Random Number Generator support (HW_RANDOM_AMD) [N/m/y/?] n
+	  VIA HW Random Number Generator support (HW_RANDOM_VIA) [Y/n/m/?] y
+	  VirtIO Random Number Generator support (HW_RANDOM_VIRTIO) [N/m/y/?] (NEW)
+	*
+	* PTP clock support
+	*
+	PTP clock support (PTP_1588_CLOCK) [Y/n/?] y
+	*
+	* Enable PHYLIB and NETWORK_PHY_TIMESTAMPING to see the additional clocks.
+	*
+	KVM virtual PTP clock (PTP_1588_CLOCK_KVM) [Y/n/m/?] (NEW)
+	*
+	* Virtio drivers
+	*
+	Virtio drivers (VIRTIO_MENU) [Y/n/?] y
+	  PCI driver for virtio devices (VIRTIO_PCI) [Y/n/m/?] y
+	    Support for legacy virtio draft 0.9.X and older devices (VIRTIO_PCI_LEGACY) [Y/n/?] (NEW)
+	  Virtio balloon driver (VIRTIO_BALLOON) [N/m/y/?] (NEW)
+	  Virtio input driver (VIRTIO_INPUT) [Y/n/m/?] y
+	  Platform bus driver for memory mapped virtio devices (VIRTIO_MMIO) [N/m/y/?] n
+	*
+	* Microsoft Hyper-V guest support
+	*
+	Microsoft Hyper-V client drivers (HYPERV) [N/m/y/?] (NEW)
+	*
+	* Network File Systems
+	*
+	Network File Systems (NETWORK_FILESYSTEMS) [Y/n/?] y
+	  NFS client support (NFS_FS) [Y/n/m/?] y
+	    NFS client support for NFS version 2 (NFS_V2) [Y/n/m/?] y
+	    NFS client support for NFS version 3 (NFS_V3) [Y/n/m/?] y
+	      NFS client support for the NFSv3 ACL protocol extension (NFS_V3_ACL) [Y/n/?] y
+	    NFS client support for NFS version 4 (NFS_V4) [Y/n/m/?] y
+	    Provide swap over NFS support (NFS_SWAP) [N/y/?] n
+	  NFS client support for NFSv4.1 (NFS_V4_1) [N/y/?] n
+	  Root file system on NFS (ROOT_NFS) [Y/n/?] y
+	  Use the legacy NFS DNS resolver (NFS_USE_LEGACY_DNS) [N/y/?] n
+	  NFS server support (NFSD) [N/m/y/?] n
+	  RPC: Enable dprintk debugging (SUNRPC_DEBUG) [N/y/?] n
+	  Ceph distributed file system (CEPH_FS) [N/m/y/?] n
+	  SMB3 and CIFS support (advanced network filesystem) (CIFS) [N/m/y/?] n
+	  Coda file system support (advanced network fs) (CODA_FS) [N/m/y/?] n
+	  Andrew File System support (AFS) (AFS_FS) [N/m/y/?] n
+	  Plan 9 Resource Sharing Support (9P2000) (9P_FS) [Y/n/m/?] y
+	    9P POSIX Access Control Lists (9P_FS_POSIX_ACL) [N/y/?] (NEW)
+	    9P Security Labels (9P_FS_SECURITY) [N/y/?] (NEW)
+	*
+	* Hardware crypto devices
+	*
+	Hardware crypto devices (CRYPTO_HW) [Y/n/?] y
+	  Support for VIA PadLock ACE (CRYPTO_DEV_PADLOCK) [N/m/y/?] n
+	  Support for AMD Secure Processor (CRYPTO_DEV_CCP) [N/y/?] n
+	  Support for Intel(R) DH895xCC (CRYPTO_DEV_QAT_DH895xCC) [N/m/y/?] n
+	  Support for Intel(R) C3XXX (CRYPTO_DEV_QAT_C3XXX) [N/m/y/?] n
+	  Support for Intel(R) C62X (CRYPTO_DEV_QAT_C62X) [N/m/y/?] n
+	  Support for Intel(R) DH895xCC Virtual Function (CRYPTO_DEV_QAT_DH895xCCVF) [N/m/y/?] n
+	  Support for Intel(R) C3XXX Virtual Function (CRYPTO_DEV_QAT_C3XXXVF) [N/m/y/?] n
+	  Support for Intel(R) C62X Virtual Function (CRYPTO_DEV_QAT_C62XVF) [N/m/y/?] n
+	  Support for Cavium CNN55XX driver (CRYPTO_DEV_NITROX_CNN55XX) [N/m/y/?] n
+	  VirtIO crypto driver (CRYPTO_DEV_VIRTIO) [M/n/y/?] (NEW)
+	#
+	# configuration written to .config
+	#
+	scripts/kconfig/conf  --syncconfig Kconfig
+	*
+	* Restart config...
+	*
+	*
+	* Compile-time checks and compiler options
+	*
+	Compile the kernel with debug info (DEBUG_INFO) [Y/n/?] y
+	  Reduce debugging information (DEBUG_INFO_REDUCED) [N/y/?] (NEW)
+	  Produce split debuginfo in .dwo files (DEBUG_INFO_SPLIT) [N/y/?] (NEW)
+	  Generate dwarf4 debuginfo (DEBUG_INFO_DWARF4) [N/y/?] (NEW)
+	  Provide GDB scripts for kernel debugging (GDB_SCRIPTS) [Y/n/?] y
+	Enable __must_check logic (ENABLE_MUST_CHECK) [Y/n/?] y
+	Warn for stack frames larger than (needs gcc 4.4) (FRAME_WARN) [2048] 2048
+	Strip assembler-generated symbols during link (STRIP_ASM_SYMS) [N/y/?] n
+	Generate readable assembler code (READABLE_ASM) [N/y/?] n
+	Enable unused/obsolete exported symbols (UNUSED_SYMBOLS) [N/y/?] n
+	Debug Filesystem (DEBUG_FS) [Y/?] y
+	Run 'make headers_check' when building vmlinux (HEADERS_CHECK) [N/y/?] n
+	Enable full Section mismatch analysis (DEBUG_SECTION_MISMATCH) [N/y/?] n
+	Make section mismatch errors non-fatal (SECTION_MISMATCH_WARN_ONLY) [Y/n/?] y
+	Compile-time stack metadata validation (STACK_VALIDATION) [Y/?] y
+	Force weak per-cpu definitions (DEBUG_FORCE_WEAK_PER_CPU) [N/y/?] n
+	  DESCEND  objtool
+	  CALL    scripts/atomic/check-atomics.sh
+	  CALL    scripts/checksyscalls.sh
+	  CHK     include/generated/compile.h
+	  Building modules, stage 2.
+	  MODPOST 14 modules
+	Kernel: arch/x86/boot/bzImage is ready  (#1)
+	[*] boot linux kernel with qemu, and enable remote debugging
+	WARNING: Image format was not specified for '/home/debug/Projects/kernelbuild/kernel-dev-archlinux.img' and probing guessed raw.
+		 Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+		 Specify the 'raw' format explicitly to remove the restrictions.
+	SeaBIOS (version 1.12.0-20181126_142135-anatol)
+
+
+	iPXE (http://ipxe.org) 00:03.0 C980 PCI2.10 PnP PMM+7FF92120+7FEF2120 C980
+
+
+
+	Booting from ROM...
+	[    1.455320] Spectre V2 : Spectre mitigation: LFENCE not serializing, switching to generic retpoline
+	[    1.780684] Huh? What family is it: 0x6?!
+	[    2.133527] acpi PNP0A03:00: fail to add MMCONFIG information, can't access extended PCI configuration space under this bridge.
+	[    3.426294] sd 0:0:0:0: [sda] Optimal transfer size 0 bytes < PAGE_SIZE (4096 bytes)
+	[    3.995265] platform regulatory.0: Direct firmware load for regulatory.db failed with error -2
+
+	Welcome to Arch Linux!
+
+	[    7.060125] systemd[1]: File /usr/lib/systemd/system/systemd-journald.service:12 configures an IP firewall (IPAddressDeny=any), but the local system does .
+	[    7.067411] systemd[1]: Proceeding WITHOUT firewalling in effect! (This warning is only shown for the first loaded unit using IP firewalling.)
+	[  OK  ] Listening on Journal Socket (/dev/log).
+	[  OK  ] Started Forward Password R…uests to Wall Directory Watch.
+	[  OK  ] Listening on udev Kernel Socket.
+	[  OK  ] Started Dispatch Password …ts to Console Directory Watch.
+	[  OK  ] Listening on Process Core Dump Socket.
+	[  OK  ] Reached target Local Encrypted Volumes.
+	[  OK  ] Set up automount Arbitrary…s File System Automount Point.
+	[  OK  ] Created slice system-serial\x2dgetty.slice.
+	[  OK  ] Listening on initctl Compatibility Named Pipe.
+	[  OK  ] Reached target Remote File Systems.
+	[  OK  ] Reached target Swap.
+	[  OK  ] Listening on Journal Audit Socket.
+	[  OK  ] Listening on LVM2 poll daemon socket.
+	[  OK  ] Listening on Journal Socket.
+		 Mounting POSIX Message Queue File System...
+		 Mounting Kernel Debug File System...
+		 Starting Apply Kernel Variables...
+		 Mounting Temporary Directory (/tmp)...
+	[  OK  ] Created slice User and Session Slice.
+		 Mounting Huge Pages File System...
+	[  OK  ] Created slice system-getty.slice.
+		 Starting Journal Service...
+	[  OK  ] Listening on LVM2 metadata daemon socket.
+	[  OK  ] Listening on udev Control Socket.
+		 Starting udev Coldplug all Devices...
+	[  OK  ] Listening on Device-mapper event daemon FIFOs.
+		 Starting Monitoring of LVM…meventd or progress polling...
+	[  OK  ] Reached target Slices.
+	[  OK  ] Reached target Paths.
+		 Starting Remount Root and Kernel File Systems...
+	[  OK  ] Mounted POSIX Message Queue File System.
+	[  OK  ] Mounted Kernel Debug File System.
+	[  OK  ] Started Apply Kernel Variables.
+	[  OK  ] Mounted Temporary Directory (/tmp).
+	[  OK  ] Mounted Huge Pages File System.
+	[  OK  ] Started Remount Root and Kernel File Systems.
+		 Starting Load/Save Random Seed...
+		 Starting Create Static Device Nodes in /dev...
+	[  OK  ] Started LVM2 metadata daemon.
+	[  OK  ] Started Load/Save Random Seed.
+	[  OK  ] Started Create Static Device Nodes in /dev.
+		 Starting udev Kernel Device Manager...
+	[  OK  ] Started udev Coldplug all Devices.
+	[  OK  ] Started Journal Service.
+		 Starting Flush Journal to Persistent Storage...
+	[  OK  ] Started Monitoring of LVM2… dmeventd or progress polling.
+	[  OK  ] Reached target Local File Systems (Pre).
+	[  OK  ] Reached target Local File Systems.
+	[  OK  ] Started udev Kernel Device Manager.
+	[  OK  ] Started Flush Journal to Persistent Storage.
+		 Starting Create Volatile Files and Directories...
+	[  OK  ] Started Create Volatile Files and Directories.
+		 Starting Update UTMP about System Boot/Shutdown...
+	[  OK  ] Found device /dev/ttyS0.
+	[  OK  ] Started Update UTMP about System Boot/Shutdown.
+	[  OK  ] Reached target System Initialization.
+	[  OK  ] Started Daily man-db regeneration.
+	[  OK  ] Started Daily Cleanup of Temporary Directories.
+	[  OK  ] Started Daily rotation of log files.
+	[  OK  ] Listening on D-Bus System Message Bus Socket.
+	[  OK  ] Reached target Sockets.
+	[  OK  ] Reached target Basic System.
+		 Starting Login Service...
+	[  OK  ] Started D-Bus System Message Bus.
+		 Starting Permit User Sessions...
+	[  OK  ] Started Daily verification of password and group files.
+	[  OK  ] Reached target Timers.
+	[  OK  ] Listening on Load/Save RF …itch Status /dev/rfkill Watch.
+	[  OK  ] Started Permit User Sessions.
+	[  OK  ] Started Serial Getty on ttyS0.
+	[  OK  ] Started Getty on tty1.
+	[  OK  ] Reached target Login Prompts.
+	[  OK  ] Started Login Service.
+	[  OK  ] Reached target Multi-User System.
+	[  OK  ] Reached target Graphical Interface.
+
+	Arch Linux 5.1.0-rc2+ (ttyS0)
+
+	archlinux login: root
+	Last login: Thu Mar 28 23:06:19 on ttyS0
+	[root@archlinux ~]#  uname -a
+	Linux archlinux 5.1.0-rc2+ #1 SMP Thu Mar 28 18:30:27 CST 2019 x86_64 GNU/Linux
+	[root@archlinux ~]#
+
